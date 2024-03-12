@@ -52,6 +52,76 @@ Este proyecto implementa una arquitectura basada en microservicios para la venta
 
 - **/compensation-service**
   - Contiene el código fuente y archivos relacionados con el servicio de compensación.
+### Tablas del Modelo
+
+1. **Usuarios:**
+   - `id` (Clave primaria)
+   - `nombre`
+   - `email`
+
+2. **Asientos:**
+   - `id` (Clave primaria)
+   - `id_usuario` (Clave foránea referenciando a la tabla Usuarios)
+   - `numero_asiento`
+   - `estado` (Enum: 'disponible', 'seleccionado', 'reservado')
+
+3. **Equipaje:**
+   - `id` (Clave primaria)
+   - `id_reserva` (Clave foránea referenciando a la tabla de Reservas)
+   - `peso`
+   - `descripcion`
+
+4. **Pagos:**
+   - `id` (Clave primaria)
+   - `monto`
+   - `fecha`
+
+5. **Boletos:**
+   - `id` (Clave primaria)
+   - `detalles`
+   - `fecha_emision`
+
+6. **Rutas:**
+   - `id` (Clave primaria)
+   - `estado` (Enum: 'disponible', 'reservado', 'seleccionado')
+   - `fecha_viaje`
+   - `cantidad_asientos`
+
+7. **Reservas:**
+   - `id` (Clave primaria)
+   - `id_usuario` (Clave foránea referenciando a la tabla Usuarios)
+   - `id_ruta` (Clave foránea referenciando a la tabla Rutas)
+   - `fecha_reserva`
+   - `cantidad_asientos`
+
+### Buenas Prácticas Aplicadas
+
+1. **Normalización del Modelo:**
+   - Se mantiene el modelo en una forma normalizada para evitar redundancias y mejorar la integridad de los datos.
+
+2. **Claves Primarias y Foráneas:**
+   - Se definen claves primarias y foráneas adecuadamente para establecer relaciones y garantizar la consistencia de los datos.
+
+3. **Enums para Estados:**
+   - Se utiliza el tipo `ENUM` para representar estados específicos, mejorando la claridad del modelo.
+
+4. **Índices:**
+   - Se crean índices en columnas comúnmente utilizadas en consultas para mejorar el rendimiento.
+
+5. **Validación de Datos:**
+   - Se implementa la validación de datos en los servicios para garantizar la coherencia y cumplir con los requisitos del modelo.
+
+6. **Transacciones:**
+   - Se utiliza el manejo de transacciones en operaciones que involucran múltiples pasos para garantizar la consistencia de la base de datos.
+
+7. **Documentación del Modelo:**
+   - Se proporciona documentación clara y completa para cada tabla y columna.
+
+8. **Separación de Servicios:**
+   - Cada microservicio se encarga de operaciones específicas, permitiendo una estructura modular y escalable del sistema.
+
+9. **Seguridad de Datos:**
+   - Se aplican prácticas de seguridad para proteger la integridad y confidencialidad de los datos.
 
 ## Uso del Proyecto
 
